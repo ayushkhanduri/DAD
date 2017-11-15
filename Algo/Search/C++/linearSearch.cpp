@@ -8,6 +8,6 @@ int main(){
     AllSearchAlgo allAlgo;
     cout<<"Enter the number to be searched : ";
     cin>>number;
-    state s = allAlgo.jumpSearch(arr,number);
+    state s = allAlgo.interpolationSearch(arr,number);
     s.found ? cout<<"Number found : "<< number << " at position " << s.position<<"\n" : cout << "Not found\n";
 }

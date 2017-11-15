@@ -7,9 +7,14 @@ class AllSearchAlgo {
     private:
         state s;
     public:
+        //complexity O(n)
         state linearSearch(std::vector<int> ,int);
+        //complexity O(Logn)
         state binarySearch(std::vector<int> , int);
+        //complexity 0(root(n))
         state jumpSearch(std::vector<int> , int);
+        state interpolationSearch(std::vector<int>,int);
+        
         std::vector<int> returnSortedArr(std::vector<int>);
 
 };
@@ -84,3 +89,21 @@ state AllSearchAlgo :: jumpSearch(std::vector<int> arr , int searchNum){
     return s;
 }
 
+state AllSearchAlgo :: interpolationSearch(std::vector<int> arr , int searchNum){
+    int h= arr.size() - 1, l = 0;
+    arr = returnSortedArr(arr);
+    while(l <= h && searchNum >= arr[l] && searchNum<= arr[h]){
+        int pos = l + (((double)(h-l) /(arr[h]-arr[l]))*(searchNum - arr[l]));
+        if(arr[pos] == searchNum){
+            s.found = true;
+            s.position = pos;
+            break;
+        }else if(arr[pos]<searchNum){
+            l  =  pos+1;
+        }else{
+            h =  pos -1;
+        }        
+    }
+    return s;
+
+}
